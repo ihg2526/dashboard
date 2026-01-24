@@ -2,8 +2,10 @@
 
 
 const IS_PROD = import.meta.env.PROD;
-// Use VITE_API_URL env var if set, otherwise default to relative /api (for proxy)
-const API_URL = import.meta.env.VITE_API_URL || '/api';
+// Use VITE_API_URL if set, otherwise:
+// - In Production: use Render Backend
+// - In Development: use relative /api (proxy)
+const API_URL = import.meta.env.VITE_API_URL || (IS_PROD ? 'https://ihg-dashboard.onrender.com' : '/api');
 
 const getAuthHeaders = () => {
     const token = localStorage.getItem('adminToken');

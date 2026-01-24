@@ -37,6 +37,12 @@ export const getBackendUrl = (path) => {
         }
     }
 
+    // Fallback if no VITE_API_URL is set
+    // If Production, assume Render Backend
+    if (import.meta.env.PROD) {
+        return `https://ihg-dashboard.onrender.com/${cleanPath}`;
+    }
+
     // Fallback for dev (proxy) or relative API
     return `/${cleanPath}`;
 };
