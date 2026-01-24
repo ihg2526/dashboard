@@ -16,7 +16,7 @@ export const getAssetPath = (path) => {
     const cleanBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
 
     // Force /dashboard/ prefix if we are in production and it's missing (failsafe)
-    if (import.meta.env.PROD && !cleanBase.includes('/dashboard/')) {
+    if (import.meta.env.VITE_PROD && !cleanBase.includes('/dashboard/')) {
         return `/dashboard/${cleanPath}`;
     }
 

@@ -30,6 +30,7 @@ jobs:
         env:
           VITE_API_URL: ${{ secrets.VITE_API_URL }}
           VITE_BASE_URL: /dashboard/
+          VITE_PROD: true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
