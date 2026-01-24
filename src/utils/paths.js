@@ -3,14 +3,22 @@ export const getAssetPath = (path) => {
     if (!path) return '';
     if (path.startsWith('http') || path.startsWith('data:')) return path;
 
-    // Remove leading slash
-    const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+    // Clean up 'public/' prefix if present in the data (common mistake)
+    let cleanPath = path.startsWith('/') ? path.slice(1) : path;
+    if (cleanPath.startsWith('public/')) {
+        cleanPath = cleanPath.replace('public/', '');
+    }
 
     // Get base URL from Vite config
     let baseUrl = import.meta.env.BASE_URL;
 
     // Ensure base ends with slash
     const cleanBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
+
+    // Force /dashboard/ prefix if we are in production and it's missing (failsafe)
+    if (import.meta.env.PROD && !cleanBase.includes('/dashboard/')) {
+        return `/dashboard/${cleanPath}`;
+    }
 
     return `${cleanBase}${cleanPath}`;
 };
@@ -44,7 +52,7 @@ export const getBackendUrl = (path) => {
 // Unified helper that guesses the source based on the path prefix
 export const getSmartPath = (path) => {
     if (!path) return '';
-    if (path.startsWith('/uploads/') || path.includes('/uploads/')) {
+    if (path.startsWith('/uploads/') || path.includes('/uploads/') || path.startsWith('uploads/')) {
         return getBackendUrl(path);
     }
     return getAssetPath(path);
