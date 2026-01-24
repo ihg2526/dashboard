@@ -2,6 +2,8 @@
 
 A React + Tailwind CSS score dashboard for a 6-team league with standings and match results.
 
+**Live Demo:** [https://ihg2526.github.io/dashboard/](https://ihg2526.github.io/dashboard/)
+
 ## 📁 Project Structure
 
 ```

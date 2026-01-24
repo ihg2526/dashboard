@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Link, Outlet } from 'react-router-dom';
+import { HashRouter, Routes, Route, Link, Outlet } from 'react-router-dom';
 import { api } from './services/api';
 
 // Components
@@ -80,7 +80,7 @@ export default function App() {
     };
 
     return (
-        <BrowserRouter basename={import.meta.env.BASE_URL}>
+        <HashRouter>
             <Routes>
                 {/* Main Public Routes */}
                 <Route element={<MainLayout />}>
@@ -115,6 +115,6 @@ export default function App() {
                     } />
                 )}
             </Routes>
-        </BrowserRouter>
+        </HashRouter>
     );
 }

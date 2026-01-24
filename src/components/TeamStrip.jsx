@@ -3,11 +3,11 @@ import { getAssetPath } from '../utils/paths';
 export default function TeamStrip({ teams }) {
     return (
         <section className="py-1">
-            <div className="max-w-6xl mx-auto px-4 py-6 flex gap-4 overflow-x-auto no-scrollbar">
+            <div className="max-w-6xl mx-auto px-4 py-6 grid grid-cols-3 md:flex md:justify-center gap-4">
                 {teams.map((team) => (
                     <div
                         key={team.id}
-                        className="flex flex-col items-center gap-2 px-2 py-4 rounded-lg backdrop-blur-sm min-w-[100px] w-1/6 hover:scale-105 transition-all duration-200"
+                        className="flex flex-col items-center gap-2 px-2 py-4 rounded-lg backdrop-blur-sm hover:scale-105 transition-all duration-200 md:w-1/6"
                     >
                         <img
                             src={getAssetPath(team.image)}

@@ -58,7 +58,7 @@ export default function ResultsGrid({ selectedDate, selectedSport, selectedGende
                             <span className="text-emerald-500">Final</span>
                         </div>
 
-                        <div className="flex items-center justify-between gap-4">
+                        <div className="flex items-center justify-between md:gap-4 gap-2">
                             {/* Home Team */}
                             <div className="flex-1 flex flex-col items-center gap-2">
                                 {/* <img
@@ -66,14 +66,14 @@ export default function ResultsGrid({ selectedDate, selectedSport, selectedGende
                                     alt={homeTeam?.name}
                                     className="w-12 h-12 rounded object-cover"
                                 /> */}
-                                <span className="text-md font-bold text-center text-theme-text-main line-clamp-1">
+                                <span className="text-xs md:text-md font-bold text-center text-theme-text-main line-clamp-1">
                                     {homeTeam?.shortName}
                                 </span>
                             </div>
 
                             {/* Score */}
                             <div className="flex flex-col items-center">
-                                <div className="text-3xl font-black text-theme-text-main slashed-zero tabular-nums tracking-tight">
+                                <div className="text-xl md:text-3xl font-black text-theme-text-main slashed-zero tabular-nums tracking-tight">
                                     {result.homeScore}
                                     <span className="text-theme-text-dim px-1">:</span>
                                     {result.awayScore}
@@ -87,14 +87,14 @@ export default function ResultsGrid({ selectedDate, selectedSport, selectedGende
                                     alt={awayTeam?.name}
                                     className="w-12 h-12 rounded object-cover"
                                 /> */}
-                                <span className="text-md font-bold text-center text-theme-text-main line-clamp-1">
+                                <span className="text-xs md:text-md font-bold text-center text-theme-text-main line-clamp-1">
                                     {awayTeam?.shortName}
                                 </span>
                             </div>
                         </div>
 
                         <div className="text-center">
-                            <span className="text-sm text-theme-text-dim">
+                            <span className="text-xs md:text-sm text-theme-text-dim">
                                 {result.sport} ({result.gender})
                             </span>
                         </div>
