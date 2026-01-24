@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: score-dashboard-backend
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node backend/server.js
+    envVars:
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ADMIN_PASSWORD
+        value: admin123
+      - key: NODE_VERSION
+        value: 18.x

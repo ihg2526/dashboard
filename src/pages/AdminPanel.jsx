@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { api } from '../services/api'; // Import API
 import BatchResults from '../components/admin/BatchResults';
 import ManualStandings from '../components/admin/ManualStandings';
@@ -8,6 +8,12 @@ import ManageForms from '../components/admin/ManageForms';
 export default function AdminPanel({ teams, sports, genders }) {
     const [activeTab, setActiveTab] = useState('results'); // 'results', 'standings', 'forms'
     const [publishStatus, setPublishStatus] = useState('idle');
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        localStorage.removeItem('adminToken');
+        navigate('/login');
+    };
 
     const handlePublish = async () => {
         if (!confirm("This will overwrite the static database and update the live site. Continue?")) return;
@@ -41,6 +47,12 @@ export default function AdminPanel({ teams, sports, genders }) {
                                 publishStatus === 'success' ? 'Published!' :
                                     publishStatus === 'error' ? 'Error!' :
                                         '☁️ Publish Changes'}
+                        </button>
+                        <button
+                            onClick={handleLogout}
+                            className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors font-bold shadow-md"
+                        >
+                            Log Out
                         </button>
                         <Link to="/" className="px-4 py-2 bg-theme-surface hover:bg-theme-surfaceHover text-theme-text-main rounded-lg transition-colors border border-theme-border">
                             ← Back to Scoreboard

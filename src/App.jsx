@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { HashRouter, Routes, Route, Link, Outlet } from 'react-router-dom';
+import { HashRouter, Routes, Route, Link, Outlet, Navigate } from 'react-router-dom';
 import { api } from './services/api';
 
 // Components
@@ -13,6 +13,17 @@ import About from './pages/About';
 import Forms from './pages/Forms';
 import Scoreboard from './pages/Scoreboard';
 import AdminPanel from './pages/AdminPanel';
+import Login from './pages/Login';
+
+// Protected Route Wrapper
+const RequireAuth = ({ children }) => {
+    const token = localStorage.getItem('adminToken');
+    // In a real app, verify token expiry here
+    if (!token) {
+        return <Navigate to="/login" replace />;
+    }
+    return children;
+};
 
 function MainLayout() {
     return (
@@ -24,12 +35,10 @@ function MainLayout() {
             </div>
             <FooterBar />
 
-            {/* Admin Floating Link (Visible on all main pages) - Only in Dev */}
-            {!import.meta.env.PROD && (
-                <Link to="/admin" className="fixed bottom-4 right-4 bg-theme-surface border border-theme-border p-3 rounded-full shadow-xl hover:bg-theme-surfaceHover text-2xl z-50" title="Admin Panel">
-                    ⚙️
-                </Link>
-            )}
+            {/* Admin Floating Link (Visible on all main pages) */}
+            <Link to="/admin" className="fixed bottom-4 right-4 bg-theme-surface border border-theme-border p-3 rounded-full shadow-xl hover:bg-theme-surfaceHover text-2xl z-50" title="Admin Panel">
+                ⚙️
+            </Link>
         </div>
     );
 }
@@ -104,16 +113,18 @@ export default function App() {
                     } />
                 </Route>
 
-                {/* Admin Route (No Layout) - Only in Dev */}
-                {!import.meta.env.PROD && (
-                    <Route path="/admin" element={
+                <Route path="/login" element={<Login />} />
+
+                {/* Protected Admin Route */}
+                <Route path="/admin" element={
+                    <RequireAuth>
                         <AdminPanel
                             teams={data.teams}
                             sports={data.sports}
                             genders={data.genders}
                         />
-                    } />
-                )}
+                    </RequireAuth>
+                } />
             </Routes>
         </HashRouter>
     );

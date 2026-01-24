@@ -1,8 +1,13 @@
 import staticDb from '../staticDb.json';
 
 const IS_PROD = import.meta.env.PROD;
-// Use relative path for proxy to work in Dev, and staticDb in Prod
-const API_URL = '/api';
+// Use VITE_API_URL env var if set, otherwise default to relative /api (for proxy)
+const API_URL = import.meta.env.VITE_API_URL || '/api';
+
+const getAuthHeaders = () => {
+    const token = localStorage.getItem('adminToken');
+    return token ? { 'Authorization': `Bearer ${token}` } : {};
+};
 
 export const api = {
     fetchTeams: async () => {
@@ -56,12 +61,11 @@ export const api = {
     },
 
     uploadForm: async (formData) => {
-        if (IS_PROD) {
-            console.warn("Uploading forms is disabled in production mode.");
-            return;
-        }
         const response = await fetch(`${API_URL}/upload`, {
             method: 'POST',
+            headers: {
+                ...getAuthHeaders()
+            },
             body: formData
         });
         if (!response.ok) throw new Error('Failed to upload form');
@@ -69,26 +73,22 @@ export const api = {
     },
 
     deleteForm: async (id) => {
-        if (IS_PROD) {
-            console.warn("Deleting forms is disabled in production mode.");
-            return;
-        }
         const response = await fetch(`${API_URL}/forms/${id}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                ...getAuthHeaders()
+            }
         });
         if (!response.ok) throw new Error('Failed to delete form');
         return response.json();
     },
 
     addResults: async (newResults) => {
-        if (IS_PROD) {
-            console.warn("Adding results is disabled in production mode.");
-            return;
-        }
         const response = await fetch(`${API_URL}/fixtures`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                ...getAuthHeaders()
             },
             body: JSON.stringify(newResults)
         });
@@ -97,14 +97,11 @@ export const api = {
     },
 
     saveStandings: async (standings) => {
-        if (IS_PROD) {
-            console.warn("Saving standings is disabled in production mode.");
-            return;
-        }
         const response = await fetch(`${API_URL}/standings`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                ...getAuthHeaders()
             },
             body: JSON.stringify(standings)
         });
@@ -113,9 +110,23 @@ export const api = {
     },
 
     publishData: async () => {
-        if (IS_PROD) throw new Error("Cannot publish from production build");
-        const response = await fetch(`${API_URL}/publish`, { method: 'POST' });
+        const response = await fetch(`${API_URL}/publish`, {
+            method: 'POST',
+            headers: {
+                ...getAuthHeaders()
+            }
+        });
         if (!response.ok) throw new Error('Failed to publish data');
+        return response.json();
+    },
+
+    login: async (password) => {
+        const response = await fetch(`${API_URL}/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ password })
+        });
+        if (!response.ok) throw new Error('Login failed');
         return response.json();
     }
 };

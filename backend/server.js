@@ -31,7 +31,11 @@ const upload = multer({ storage: storage });
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use('/uploads', express.static(UPLOADS_DIR));
+app.use(bodyParser.json());
+// Serve uploads with CORS enabled for all origins (or restrict if strict)
+app.use('/uploads', cors(), express.static(UPLOADS_DIR));
+
+const auth = require('./auth');
 
 // Helper to read DB
 const readDB = () => {
@@ -55,6 +59,9 @@ const writeDB = (data) => {
 
 // --- Endpoints ---
 
+// 0. Auth
+app.post('/api/login', auth.login);
+
 // 1. Metadata
 app.get('/api/metadata', (req, res) => {
     const db = readDB();
@@ -73,7 +80,7 @@ app.get('/api/fixtures', (req, res) => {
     res.json(db.fixtures);
 });
 
-app.post('/api/fixtures', (req, res) => {
+app.post('/api/fixtures', auth.authenticateToken, (req, res) => {
     const db = readDB();
     const newResults = req.body; // Expecting array
 
@@ -102,7 +109,7 @@ app.get('/api/standings', (req, res) => {
     res.json(db.standings || []);
 });
 
-app.post('/api/standings', (req, res) => {
+app.post('/api/standings', auth.authenticateToken, (req, res) => {
     const db = readDB();
     const newStanding = req.body; // Expecting { sport, gender, entries: [{teamId, points}] }
 
@@ -144,7 +151,7 @@ app.get('/api/forms', (req, res) => {
     res.json(db.forms || []);
 });
 
-app.post('/api/upload', upload.single('file'), (req, res) => {
+app.post('/api/upload', auth.authenticateToken, upload.single('file'), (req, res) => {
     try {
         if (!req.file) {
             return res.status(400).json({ error: 'No file uploaded' });
@@ -180,7 +187,7 @@ app.post('/api/upload', upload.single('file'), (req, res) => {
     }
 });
 
-app.delete('/api/forms/:id', (req, res) => {
+app.delete('/api/forms/:id', auth.authenticateToken, (req, res) => {
     const db = readDB();
     const id = parseInt(req.params.id);
 
@@ -211,7 +218,7 @@ app.delete('/api/forms/:id', (req, res) => {
 });
 
 // 7. Publish to Static (For deployment)
-app.post('/api/publish', async (req, res) => {
+app.post('/api/publish', auth.authenticateToken, async (req, res) => {
     try {
         console.log("Publishing data...");
         const db = readDB();
