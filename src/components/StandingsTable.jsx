@@ -1,4 +1,4 @@
-import { getAssetPath } from '../utils/paths';
+import { getSmartPath } from '../utils/paths';
 
 export default function StandingsTable({ standings, teams }) {
     // If not loaded yet, return null or skeleton
@@ -61,7 +61,7 @@ export default function StandingsTable({ standings, teams }) {
                                 <td className="px-3 py-3 text-sm font-semibold text-theme-text-dim">{index + 1}</td>
                                 <td className="px-3 py-3 text-sm font-semibold flex items-center gap-3">
                                     {teamInfo?.image ? (
-                                        <img src={getAssetPath(teamInfo.image)} alt={teamInfo.name} className="w-6 h-6 rounded object-cover" />
+                                        <img src={getSmartPath(teamInfo.image)} alt={teamInfo.name} className="w-6 h-6 rounded object-cover" />
                                     ) : (
                                         <span className="w-6 h-6 rounded bg-theme-surface flex items-center justify-center text-[10px] font-bold text-theme-text-muted uppercase ring-1 ring-theme-border">
                                             {teamInfo?.shortName || '?'}

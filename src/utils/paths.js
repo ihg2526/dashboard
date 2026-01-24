@@ -1,12 +1,13 @@
+// Helper for static assets (logos, icons) that live in the frontend 'public' folder
 export const getAssetPath = (path) => {
     if (!path) return '';
     if (path.startsWith('http') || path.startsWith('data:')) return path;
 
-    // Remove leading slash if present to avoid double slashes when joining
+    // Remove leading slash
     const cleanPath = path.startsWith('/') ? path.slice(1) : path;
 
-    // Get base URL (defaults to '/' in dev, '/dashboard/' in prod per vite config)
-    const baseUrl = import.meta.env.BASE_URL;
+    // Get base URL from Vite config
+    let baseUrl = import.meta.env.BASE_URL;
 
     // Ensure base ends with slash
     const cleanBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
@@ -14,6 +15,7 @@ export const getAssetPath = (path) => {
     return `${cleanBase}${cleanPath}`;
 };
 
+// Helper for dynamic uploads (forms, user content) that live on the Backend
 export const getBackendUrl = (path) => {
     if (!path) return '';
     if (path.startsWith('http')) return path;
@@ -22,8 +24,6 @@ export const getBackendUrl = (path) => {
     const cleanPath = path.startsWith('/') ? path.slice(1) : path;
 
     // Get API Root
-    // If VITE_API_URL is set (e.g. https://backend.com/api), we want the origin (https://backend.com)
-    // because uploads are at /uploads (not /api/uploads)
     const apiEnv = import.meta.env.VITE_API_URL;
 
     if (apiEnv && apiEnv.startsWith('http')) {
@@ -39,4 +39,13 @@ export const getBackendUrl = (path) => {
 
     // Fallback for dev (proxy) or relative API
     return `/${cleanPath}`;
+};
+
+// Unified helper that guesses the source based on the path prefix
+export const getSmartPath = (path) => {
+    if (!path) return '';
+    if (path.startsWith('/uploads/') || path.includes('/uploads/')) {
+        return getBackendUrl(path);
+    }
+    return getAssetPath(path);
 };
