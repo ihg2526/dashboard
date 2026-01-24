@@ -10,7 +10,7 @@ export const getAssetPath = (path) => {
     }
 
     // Get base URL from Vite config
-    let baseUrl = import.meta.env.BASE_URL;
+    let baseUrl = import.meta.env.VITE_BASE_URL;
 
     // Ensure base ends with slash
     const cleanBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
