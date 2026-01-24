@@ -70,19 +70,6 @@ node backend/server.js
 2.  Go to the **Admin Panel** (`/admin`).
 3.  Add matches, upload forms, or update standings.
 
-### 2. Publish Changes
-The app is built to be deployed as a **static site**. The live database is not used in production.
-1.  In the Admin Panel header, click **"☁️ Publish Changes"**.
-2.  This copies the live data from `backend/data/db.json` to `src/staticDb.json` and syncs uploaded files.
-
-### 3. Deploy
-See the detailed guide in [DEPLOY.md](./DEPLOY.md).
-
-Essentially:
-1.  Commit the updated `src/staticDb.json` and `public/uploads` folders.
-2.  Push to GitHub.
-3.  The GitHub Action will automatically build and deploy.
-
 ## 📝 Customization
 
 ### Edit Teams & Configuration

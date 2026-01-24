@@ -8,8 +8,8 @@ export default defineConfig(({ command, mode }) => {
         server: {
             port: 3000,
             proxy: {
-                '/api': 'https://ihg-dashboard.onrender.com',
-                '/uploads': 'https://ihg-dashboard.onrender.com'
+                '/api': 'http://219.70.120.85:3001',
+                '/uploads': 'http://219.70.120.85:3001'
             }
         }
     };

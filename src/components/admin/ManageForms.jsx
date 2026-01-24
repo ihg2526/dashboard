@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { api } from '../../services/api';
+import { getBackendUrl } from '../../utils/paths';
 
 export default function ManageForms() {
     const [forms, setForms] = useState([]);
@@ -115,7 +116,7 @@ export default function ManageForms() {
                             </div>
                             <div className="flex items-center gap-4">
                                 <a
-                                    href={form.path}
+                                    href={getBackendUrl(form.path)}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="text-theme-accent-base hover:underline text-sm font-medium"

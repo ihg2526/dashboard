@@ -5,7 +5,12 @@ const IS_PROD = import.meta.env.PROD;
 // Use VITE_API_URL if set, otherwise:
 // - In Production: use Render Backend
 // - In Development: use relative /api (proxy)
-const API_URL = import.meta.env.VITE_API_URL || (IS_PROD ? 'https://ihg-dashboard.onrender.com' : '/api');
+const API_URL = (import.meta.env.VITE_API_URL || (IS_PROD ? 'https://ihg-dashboard.onrender.com' : '/api')).replace(/\/$/, '');
+console.log("Current API Config:", {
+    IS_PROD,
+    VITE_API_URL: import.meta.env.VITE_API_URL,
+    EFFECTIVE_API_URL: API_URL
+});
 
 const getAuthHeaders = () => {
     const token = localStorage.getItem('adminToken');
@@ -95,17 +100,6 @@ export const api = {
             body: JSON.stringify(standings)
         });
         if (!response.ok) throw new Error('Failed to save standings');
-        return response.json();
-    },
-
-    publishData: async () => {
-        const response = await fetch(`${API_URL}/publish`, {
-            method: 'POST',
-            headers: {
-                ...getAuthHeaders()
-            }
-        });
-        if (!response.ok) throw new Error('Failed to publish data');
         return response.json();
     },
 

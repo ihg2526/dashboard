@@ -7,7 +7,6 @@ import ManageForms from '../components/admin/ManageForms';
 
 export default function AdminPanel({ teams, sports, genders }) {
     const [activeTab, setActiveTab] = useState('results'); // 'results', 'standings', 'forms'
-    const [publishStatus, setPublishStatus] = useState('idle');
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -15,19 +14,7 @@ export default function AdminPanel({ teams, sports, genders }) {
         navigate('/login');
     };
 
-    const handlePublish = async () => {
-        if (!confirm("This will overwrite the static database and update the live site. Continue?")) return;
-        setPublishStatus('publishing');
-        try {
-            await api.publishData();
-            setPublishStatus('success');
-            setTimeout(() => setPublishStatus('idle'), 3000);
-        } catch (err) {
-            console.error(err);
-            setPublishStatus('error');
-            setTimeout(() => setPublishStatus('idle'), 3000);
-        }
-    };
+
 
     return (
         <div className="min-h-screen bg-theme-bg text-theme-text-main p-8 font-sans">
@@ -36,19 +23,7 @@ export default function AdminPanel({ teams, sports, genders }) {
                     <div className="flex flex-col md:flex-row justify-between items-center mb-6 md:mb-10 border-b border-theme-border pb-6 gap-4">
                         <h1 className="text-3xl md:text-4xl font-bold text-theme-accent-base text-center md:text-left">Admin Dashboard</h1>
                         <div className="flex flex-row flex-wrap sm:flex-row gap-3 w-full md:w-auto">
-                            <button
-                                onClick={handlePublish}
-                                disabled={publishStatus === 'publishing'}
-                                className={`px-3 py-2 md:px-4 md:py-2 text-sm md:text-base rounded-lg font-bold text-white transition-all text-center ${publishStatus === 'success' ? 'bg-emerald-500' :
-                                    publishStatus === 'error' ? 'bg-red-500' :
-                                        'bg-purple-600 hover:bg-purple-700'
-                                    }`}
-                            >
-                                {publishStatus === 'publishing' ? 'Publishing...' :
-                                    publishStatus === 'success' ? 'Published!' :
-                                        publishStatus === 'error' ? 'Error!' :
-                                            '☁️ Publish Changes'}
-                            </button>
+
                             <button
                                 onClick={handleLogout}
                                 className="px-3 py-2 md:px-4 md:py-2 text-sm md:text-base bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors font-bold shadow-md text-center"

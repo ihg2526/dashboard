@@ -24,9 +24,14 @@ export default function Forms() {
                                 <p className="text-theme-text-dim mt-1">
                                     Please complete this form before the first match regardless of sport.</p>
                             </div>
-                            <button className="px-4 py-2 bg-theme-surfaceHover text-theme-accent-base border border-theme-accent-base rounded-lg hover:bg-theme-accent-base hover:text-white transition-colors">
-                                <a href="https://forms.gle/QCgJrgqXg4EspTtS7">Open Form</a>
-                            </button>
+                            <a
+                                href="https://forms.gle/QCgJrgqXg4EspTtS7"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-4 py-2 bg-theme-surfaceHover text-theme-accent-base border border-theme-accent-base rounded-lg hover:bg-theme-accent-base hover:text-white transition-colors"
+                            >
+                                Open Form
+                            </a>
                         </div>
 
                         <div className="flex flex-col md:flex-row md:items-center justify-between p-6 bg-theme-bg/50 rounded-xl border border-theme-border gap-4">
@@ -34,9 +39,14 @@ export default function Forms() {
                                 <h3 className="text-xl font-bold text-theme-text-main">Par-Q</h3>
                                 <p className="text-theme-text-dim mt-1">Once a day on the match day and before the first match of the day</p>
                             </div>
-                            <button className="px-4 py-2 bg-theme-surfaceHover text-theme-accent-base border border-theme-accent-base rounded-lg hover:bg-theme-accent-base hover:text-white transition-colors">
-                                <a href="https://forms.gle/2PcZrbC5eQHLfZZZ7">Open Form</a>
-                            </button>
+                            <a
+                                href="https://forms.gle/2PcZrbC5eQHLfZZZ7"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-4 py-2 bg-theme-surfaceHover text-theme-accent-base border border-theme-accent-base rounded-lg hover:bg-theme-accent-base hover:text-white transition-colors"
+                            >
+                                Open Form
+                            </a>
                         </div>
 
                         {/* Dynamic Forms */}
@@ -46,15 +56,14 @@ export default function Forms() {
                                     <h3 className="text-xl font-bold text-theme-text-main">{form.name}</h3>
                                     <p className="text-theme-text-dim mt-1">Uploaded document</p>
                                 </div>
-                                <button className="px-4 py-2 bg-theme-surfaceHover text-theme-accent-base border border-theme-accent-base rounded-lg hover:bg-theme-accent-base hover:text-white transition-colors">
-                                    <a
-                                        href={getBackendUrl(form.path)}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        Open Form
-                                    </a>
-                                </button>
+                                <a
+                                    href={getBackendUrl(form.path)}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="px-4 py-2 bg-theme-surfaceHover text-theme-accent-base border border-theme-accent-base rounded-lg hover:bg-theme-accent-base hover:text-white transition-colors"
+                                >
+                                    Open Form
+                                </a>
                             </div>
                         ))}
                     </div>
