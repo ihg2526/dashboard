@@ -20,7 +20,10 @@ export const getAssetPath = (path) => {
     // Fail-safe: If we are in production, we MUST be at /dashboard/. 
     // If baseUrl came back empty or root for some reason, FORCE it.
     if (import.meta.env.PROD && !cleanBase.includes('/dashboard/')) {
+        console.log(cleanPath);
         cleanPath = cleanPath.replace('../', '');
+        console.log(cleanPath);
+        console.log(`/dashboard/${cleanPath}`);
         return `/dashboard/${cleanPath}`;
     }
     return `${cleanBase}${cleanPath}`;
