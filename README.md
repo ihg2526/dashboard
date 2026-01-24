@@ -7,21 +7,23 @@ A React + Tailwind CSS score dashboard for a 6-team league with standings and ma
 ```
 score/
 ├── index.html                 # Vite entry
-├── public/
-│   └── index.html              # HTML entry point
+├── public/                    # Static assets & Uploads
+│   └── uploads/               # User-uploaded files (document forms)
+├── backend/                   # Local development server
+│   ├── data/
+│   │   └── db.json            # LIVE local database
+│   └── server.js              # Express server
 ├── src/
-│   ├── components/
-│   │   ├── StandingsTable.jsx  # League standings table
-│   │   └── ResultsGrid.jsx     # Recent results cards
-│   ├── App.jsx                 # Main app component
-│   ├── data.js                 # Fixed standings and fixtures data
-│   ├── index.js                # React entry point
-│   └── index.css               # Tailwind directives
-├── package.json                # Dependencies
-├── tailwind.config.js          # Tailwind configuration
-├── postcss.config.js           # PostCSS configuration
-├── vite.config.js              # Vite configuration
-└── .gitignore                  # Git ignore file
+│   ├── staticDb.json          # STATIC production database (auto-published)
+│   ├── components/            # React components
+│   ├── pages/                 # Page components
+│   ├── services/
+│   │   └── api.js             # API interaction logic
+│   ├── App.jsx                # Main app component
+│   └── index.css              # Tailwind directives
+├── package.json               # Dependencies
+├── vite.config.js             # Configuration
+└── DEPLOY.md                  # Deployment Guide
 ```
 
 ## 🚀 Getting Started
@@ -33,14 +35,21 @@ score/
 ### Installation
 
 ```bash
-# Install dependencies
-npm install
+### Local Development (With Admin Panel)
 
-# Start development server (Vite)
+To run the app with the Admin Panel and live database editing:
+
+```bash
+# Terminal 1: Start the Frontend
 npm run dev
+
+# Terminal 2: Start the Backend (in root folder)
+node backend/server.js
 ```
 
-The app will open at `http://localhost:3000` (configured in vite.config.js)
+- **Frontend**: http://localhost:3000
+- **Admin**: http://localhost:3000/admin (Only available in Dev mode)
+- **Backend API**: http://localhost:3001
 
 ## 🎨 Features
 
@@ -54,7 +63,28 @@ The app will open at `http://localhost:3000` (configured in vite.config.js)
 
 ### Edit Teams & Data
 
-Modify `src/data.js` to change:
+### 1. Update Data
+1.  Run the project locally (`npm run dev` and `node backend/server.js`).
+2.  Go to the **Admin Panel** (`/admin`).
+3.  Add matches, upload forms, or update standings.
+
+### 2. Publish Changes
+The app is built to be deployed as a **static site**. The live database is not used in production.
+1.  In the Admin Panel header, click **"☁️ Publish Changes"**.
+2.  This copies the live data from `backend/data/db.json` to `src/staticDb.json` and syncs uploaded files.
+
+### 3. Deploy
+See the detailed guide in [DEPLOY.md](./DEPLOY.md).
+
+Essentially:
+1.  Commit the updated `src/staticDb.json` and `public/uploads` folders.
+2.  Push to GitHub.
+3.  The GitHub Action will automatically build and deploy.
+
+## 📝 Customization
+
+### Edit Teams & Configuration
+Modify `backend/data/db.json` directly or use the Admin UI.
 
 - Team names, emojis, and IDs
 - Match results and dates
