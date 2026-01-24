@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { api } from '../services/api';
-import { getAssetPath } from '../utils/paths';
+import { getBackendUrl } from '../utils/paths';
 
 export default function Forms() {
     const [forms, setForms] = useState([]);
@@ -48,7 +48,7 @@ export default function Forms() {
                                 </div>
                                 <button className="px-4 py-2 bg-theme-surfaceHover text-theme-accent-base border border-theme-accent-base rounded-lg hover:bg-theme-accent-base hover:text-white transition-colors">
                                     <a
-                                        href={getAssetPath(form.path)}
+                                        href={getBackendUrl(form.path)}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >

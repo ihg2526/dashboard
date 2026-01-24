@@ -1,4 +1,5 @@
-import staticDb from '../staticDb.json';
+// staticDb removed - using live API
+
 
 const IS_PROD = import.meta.env.PROD;
 // Use VITE_API_URL env var if set, otherwise default to relative /api (for proxy)
@@ -11,50 +12,36 @@ const getAuthHeaders = () => {
 
 export const api = {
     fetchTeams: async () => {
-        if (IS_PROD) return Promise.resolve(staticDb.teams);
         const response = await fetch(`${API_URL}/teams?t=${Date.now()}`);
         if (!response.ok) throw new Error('Failed to fetch teams');
         return response.json();
     },
 
     fetchStandings: async () => {
-        if (IS_PROD) return Promise.resolve(staticDb.standings || []);
         const response = await fetch(`${API_URL}/standings?t=${Date.now()}`);
         if (!response.ok) throw new Error('Failed to fetch standings');
         return response.json();
     },
 
     fetchFixtures: async () => {
-        if (IS_PROD) return Promise.resolve(staticDb.fixtures);
         const response = await fetch(`${API_URL}/fixtures?t=${Date.now()}`);
         if (!response.ok) throw new Error('Failed to fetch fixtures');
         return response.json();
     },
 
     fetchMetadata: async () => {
-        if (IS_PROD) return Promise.resolve(staticDb.metadata);
         const response = await fetch(`${API_URL}/metadata?t=${Date.now()}`);
         if (!response.ok) throw new Error('Failed to fetch metadata');
         return response.json();
     },
 
     fetchInitialData: async () => {
-        if (IS_PROD) {
-            return Promise.resolve({
-                teams: staticDb.teams,
-                fixtures: staticDb.fixtures,
-                sports: staticDb.metadata.sports,
-                genders: staticDb.metadata.genders,
-                standings: staticDb.standings || []
-            });
-        }
         const response = await fetch(`${API_URL}/initial-data?t=${Date.now()}`);
         if (!response.ok) throw new Error('Failed to fetch initial data');
         return response.json();
     },
 
     fetchForms: async () => {
-        if (IS_PROD) return Promise.resolve(staticDb.forms || []);
         const response = await fetch(`${API_URL}/forms?t=${Date.now()}`);
         if (!response.ok) throw new Error('Failed to fetch forms');
         return response.json();

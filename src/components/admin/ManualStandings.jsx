@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { getAssetPath } from '../../utils/paths';
 import { api } from '../../services/api';
 
 export default function ManualStandings({ teams, sports, genders }) {
@@ -98,7 +99,7 @@ export default function ManualStandings({ teams, sports, genders }) {
                         return (
                             <div key={entry.teamId} className="flex items-center justify-between bg-theme-bg/50 p-3 rounded border border-theme-border">
                                 <div className="flex items-center gap-3">
-                                    {team?.image && <img src={team.image} className="w-8 h-8 object-contain" alt={team.name} />}
+                                    {team?.image && <img src={getAssetPath(team.image)}className="w-8 h-8 object-contain" alt={team.name} />}
                                     <span className="font-bold">{team?.name}</span>
                                 </div>
                                 <div className="flex items-center gap-2">
