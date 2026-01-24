@@ -1,4 +1,5 @@
 // Helper for static assets (logos, icons) that live in the frontend 'public' folder
+console.log(import.meta.env);
 export const getAssetPath = (path) => {
     if (!path) return '';
     if (path.startsWith('http') || path.startsWith('data:')) return path;
@@ -10,13 +11,18 @@ export const getAssetPath = (path) => {
     }
 
     // Get base URL from Vite config
-    let baseUrl = import.meta.env.VITE_BASE_URL;
+    // Note: We use the standard BASE_URL which Vite provides based on vite.config.js
+    let baseUrl = import.meta.env.BASE_URL;
 
     // Ensure base ends with slash
     const cleanBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
 
-    // Force /dashboard/ prefix if we are in production and it's missing (failsafe)
-    if (import.meta.env.VITE_PROD && !cleanBase.includes('/dashboard/')) {
+    // Fail-safe: If we are in production, we MUST be at /dashboard/. 
+    // If baseUrl came back empty or root for some reason, FORCE it.
+    console.log(import.meta.env.PROD);
+    console.log(cleanBase);
+    console.log(cleanPath);
+    if (import.meta.env.PROD && !cleanBase.includes('/dashboard/')) {
         return `/dashboard/${cleanPath}`;
     }
 
