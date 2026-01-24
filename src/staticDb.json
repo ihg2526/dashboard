@@ -1921,14 +1921,5 @@
             ]
         }
     ],
-    "forms": [
-        {
-            "id": 1769221512047,
-            "name": "rule",
-            "fileName": "1769221512040-796047789-IHG 15-16 Rules and Regulations.pdf",
-            "originalName": "IHG 15-16 Rules and Regulations.pdf",
-            "path": "/uploads/1769221512040-796047789-IHG 15-16 Rules and Regulations.pdf",
-            "uploadedAt": "2026-01-24T02:25:12.047Z"
-        }
-    ]
+    "forms": []
 }
