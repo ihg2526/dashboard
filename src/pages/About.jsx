@@ -1,9 +1,14 @@
 import React from 'react';
 import TeamStrip from '../components/TeamStrip';
+import SEO from '../components/SEO';
 
 export default function About({ teams }) {
     return (
         <div className="min-h-screen bg-theme-bg text-theme-text-main py-8 px-4 md:py-12 md:px-6">
+            <SEO
+                title="About | 25/26 NUS IHG Dashboard"
+                description="Learn about the Inter Hall Games (IHG) competition, participating halls, and the sports committee."
+            />
             <div className="max-w-4xl mx-auto">
                 <div className="bg-theme-surface rounded-2xl border border-theme-border p-8 shadow-xl space-y-6">
                     <h1 className="text-4xl font-bold text-theme-accent-base border-b border-theme-border pb-4">About IHG 25/26</h1>

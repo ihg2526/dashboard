@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { api } from '../services/api';
 import { getBackendUrl } from '../utils/paths';
+import SEO from '../components/SEO';
 
 export default function Forms() {
     const [forms, setForms] = useState([]);
@@ -11,6 +12,10 @@ export default function Forms() {
 
     return (
         <div className="min-h-screen bg-theme-bg text-theme-text-main py-8 px-4 md:py-12 md:px-6">
+            <SEO
+                title="Forms & Resources | 25/26 IHG Dashboard"
+                description="Download necessary forms and resources for the IHG tournament, including risk acknowledgement and Par-Q forms."
+            />
             <div className="max-w-4xl mx-auto">
                 <div className="bg-theme-surface rounded-2xl border border-theme-border p-8 shadow-xl">
                     <h1 className="text-4xl font-bold text-theme-accent-base mb-8">Forms & Resources</h1>

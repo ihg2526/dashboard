@@ -4,6 +4,7 @@ import Filters from '../components/Filters';
 import StandingsTable from '../components/StandingsTable';
 import HeadToHeadMatrix from '../components/HeadToHeadMatrix';
 import ResultsGrid from '../components/ResultsGrid';
+import SEO from '../components/SEO';
 
 export default function Scoreboard({
     data,
@@ -61,6 +62,10 @@ export default function Scoreboard({
 
     return (
         <div className="min-h-screen bg-theme-bg text-theme-text-main px-4 md:px-6 font-sans mt-5">
+            <SEO
+                title="Scoreboard | 25/26 IHG Dashboard"
+                description="Live scores, detailed standings, and head-to-head records for the IHG tournament."
+            />
             {/* Main Content */}
             <main className="max-w-6xl mx-auto px-4 space-y-10">
                 {/* Standings Section */}

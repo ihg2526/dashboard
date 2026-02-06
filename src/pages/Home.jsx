@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { api } from '../services/api';
 import StandingsTable from '../components/StandingsTable';
+import SEO from '../components/SEO';
 
 export default function Home({ data }) {
     const [activeTab, setActiveTab] = useState('overall');
@@ -27,6 +28,10 @@ export default function Home({ data }) {
 
     return (
         <div className="min-h-screen bg-theme-bg text-theme-text-main py-8 px-4 md:py-12 md:px-6">
+            <SEO
+                title="Home | 25/26 IHG Dashboard"
+                description="Welcome to the official 25/26 IHG Dashboard. Track championship standings, live results, and team performance."
+            />
             <div className="max-w-4xl mx-auto space-y-8">
                 {/* Welcome Section */}
                 <div className="text-center space-y-4">

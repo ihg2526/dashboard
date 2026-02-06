@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../services/api';
+import SEO from '../components/SEO';
 
 export default function Login() {
     const [password, setPassword] = useState('');
@@ -27,6 +28,7 @@ export default function Login() {
 
     return (
         <div className="min-h-screen bg-theme-bg flex items-center justify-center p-4">
+            <SEO title="Admin Login | 25/26 IHG Dashboard" />
             <div className="bg-theme-surface border border-theme-border p-8 rounded-xl shadow-2xl max-w-md w-full">
                 <h1 className="text-3xl font-bold text-theme-text-main mb-6 text-center">Admin Access</h1>
 
