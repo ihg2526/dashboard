@@ -93,7 +93,7 @@ export default function App() {
             <Routes>
                 {/* Main Public Routes */}
                 <Route element={<MainLayout />}>
-                    <Route path="/" element={<Home />} />
+                    <Route path="/" element={<Home data={data} />} />
                     <Route path="/about" element={<About teams={data.teams} />} />
                     <Route path="/forms" element={<Forms />} />
                     <Route path="/results" element={

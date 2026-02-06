@@ -1,24 +1,20 @@
 import { getSmartPath } from '../utils/paths';
 
-export default function StandingsTable({ standings, teams }) {
+export default function StandingsTable({ standings, teams, minimal = false }) {
     // If not loaded yet, return null or skeleton
     if (!standings || !teams) return null;
 
     const teamLookup = new Map(teams.map(t => [t.id, t]));
 
     // Check if we have extended stats (played, won, etc.)
-    const hasStats = standings.some(s => s.played !== undefined);
+    // But if 'minimal' prop is true, we force hiding stats
+    const hasStats = !minimal && standings.some(s => s.played !== undefined);
 
     // Sort standings by points (descending)
     // If stats exist, use GD as tiebreaker
     const sorted = [...standings].sort((a, b) => {
         if (b.points !== a.points) return b.points - a.points;
-        if (hasStats) {
-            const gdA = (a.goalsFor || 0) - (a.goalsAgainst || 0);
-            const gdB = (b.goalsFor || 0) - (b.goalsAgainst || 0);
-            return gdB - gdA;
-        }
-        return 0; // No tiebreaker for manual points only
+        return 0;
     });
 
     if (sorted.length === 0) return <div className="text-theme-text-muted italic p-4">No standings available.</div>;
@@ -36,9 +32,6 @@ export default function StandingsTable({ standings, teams }) {
                                 <th className="px-3 py-3 text-center text-xs font-bold uppercase tracking-wider text-theme-text-muted" title="Won">W</th>
                                 <th className="px-3 py-3 text-center text-xs font-bold uppercase tracking-wider text-theme-text-muted" title="Drawn">D</th>
                                 <th className="px-3 py-3 text-center text-xs font-bold uppercase tracking-wider text-theme-text-muted" title="Lost">L</th>
-                                <th className="px-3 py-3 text-center text-xs font-bold uppercase tracking-wider text-theme-text-muted" title="Goals For">GF</th>
-                                <th className="px-3 py-3 text-center text-xs font-bold uppercase tracking-wider text-theme-text-muted" title="Goals Against">GA</th>
-                                <th className="px-3 py-3 text-center text-xs font-bold uppercase tracking-wider text-theme-text-muted" title="Goal Difference">GD</th>
                             </>
                         )}
                         <th className="px-3 py-3 text-center text-xs font-bold uppercase tracking-wider text-theme-accent-base" title="Points">Pts</th>
@@ -46,7 +39,6 @@ export default function StandingsTable({ standings, teams }) {
                 </thead>
                 <tbody className="divide-y divide-theme-border/30 bg-theme-bg/30">
                     {sorted.map((row, index) => {
-                        const goalDifference = (row.goalsFor || 0) - (row.goalsAgainst || 0);
                         const teamInfo = teamLookup.get(row.teamId);
 
                         let rowClass = 'hover:bg-theme-surfaceHover/50 transition-colors';
@@ -75,9 +67,6 @@ export default function StandingsTable({ standings, teams }) {
                                         <td className="px-3 py-3 text-sm text-center text-theme-text-dim">{row.won}</td>
                                         <td className="px-3 py-3 text-sm text-center text-theme-text-dim">{row.drawn}</td>
                                         <td className="px-3 py-3 text-sm text-center text-theme-text-dim">{row.lost}</td>
-                                        <td className="px-3 py-3 text-sm text-center text-theme-text-dim">{row.goalsFor}</td>
-                                        <td className="px-3 py-3 text-sm text-center text-theme-text-dim">{row.goalsAgainst}</td>
-                                        <td className="px-3 py-3 text-sm text-center text-theme-text-main font-medium">{goalDifference > 0 ? '+' : ''}{goalDifference}</td>
                                     </>
                                 )}
                                 <td className="px-3 py-3 text-sm text-center font-bold text-theme-accent-base">{row.points}</td>

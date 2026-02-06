@@ -18,6 +18,12 @@ export const api = {
         return response.json();
     },
 
+    fetchAggregatedStandings: async () => {
+        const response = await fetch(`${API_URL}/standings/aggregated?t=${Date.now()}`);
+        if (!response.ok) throw new Error('Failed to fetch aggregated standings');
+        return response.json();
+    },
+
     fetchFixtures: async () => {
         const response = await fetch(`${API_URL}/fixtures?t=${Date.now()}`);
         if (!response.ok) throw new Error('Failed to fetch fixtures');
