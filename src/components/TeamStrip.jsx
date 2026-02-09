@@ -7,7 +7,8 @@ export default function TeamStrip({ teams }) {
                 {teams.map((team) => (
                     <div
                         key={team.id}
-                        className="flex flex-col items-center gap-2 px-2 py-4 rounded-lg backdrop-blur-sm hover:scale-105 transition-all duration-200 md:w-1/6"
+                        onClick={() => window.open(team.link, '_blank')}
+                        className="flex flex-col items-center gap-2 px-2 py-4 rounded-lg backdrop-blur-sm hover:scale-105 transition-all duration-200 md:w-1/6 cursor-pointer"
                     >
                         <img
                             src={getSmartPath(team.image)}
