@@ -1,117 +1,37 @@
-# Score Dashboard
+# IHG 25/26 Score Dashboard
 
-A React + Tailwind CSS score dashboard for a 6-team league with standings and match results.
+Track your league's performance with a clean, fast, and responsive sports dashboard.
 
 **Live Demo:** [https://ihg2526.github.io/dashboard/](https://ihg2526.github.io/dashboard/)
 
-## 📁 Project Structure
+## 📸 Features
 
-```
-score/
-├── index.html                 # Vite entry
-├── public/                    # Static assets & Uploads
-│   └── uploads/               # User-uploaded files (document forms)
-├── backend/                   # Local development server
-│   ├── data/
-│   │   └── db.json            # LIVE local database
-│   └── server.js              # Express server
-├── src/
-│   ├── staticDb.json          # STATIC production database (auto-published)
-│   ├── components/            # React components
-│   ├── pages/                 # Page components
-│   ├── services/
-│   │   └── api.js             # API interaction logic
-│   ├── App.jsx                # Main app component
-│   └── index.css              # Tailwind directives
-├── package.json               # Dependencies
-├── vite.config.js             # Configuration
-└── DEPLOY.md                  # Deployment Guide
-```
+- 🏆 **League Standings** - View current team rankings with points and goal difference
+- ⚽ **Match Results** - Check recent and upcoming match results
+- 🆚 **Head-to-Head Comparison** - Compare team statistics side by side
+- 📱 **Responsive Design** - Works seamlessly on mobile, tablet, and desktop
+- 📝 **Forms Management** - Upload and manage team forms with file upload support
+- 🔧 **Admin Panel** - Full control over teams, matches, and standings (development mode)
+- 🐳 **Dockerized Full Stack** - Containerized setup with Nginx reverse proxy
+- 🔙 **Backend API** - Robust Node.js/Express backend for data management
 
-## 🚀 Getting Started
+## 🖼️ Screenshots
 
-### Prerequisites
+**Home**
+![Home](assets/home.png)
 
-- Node.js (v14+) and npm
+**Results**
+![Results](assets/results.png)
 
-### Installation
+**Standings**
+![Standings](assets/standings.png)
 
-```bash
-### Local Development (With Admin Panel)
+**Filters**
+![Filters](assets/filter.png)
 
-To run the app with the Admin Panel and live database editing:
+**Forms**
+![Forms](assets/forms.png)
 
-```bash
-# Terminal 1: Start the Frontend
-npm run dev
+## 🔍 Search Keywords
 
-# Terminal 2: Start the Backend (in root folder)
-node backend/server.js
-```
-
-- **Frontend**: http://localhost:3000
-- **Admin**: http://localhost:3000/admin (Only available in Dev mode)
-- **Backend API**: http://localhost:3001
-
-## 🎨 Features
-
-- ✅ **League Standings Table** - Auto-sorted by points and goal difference
-- ✅ **Recent Results** - Grid view of recent matches
-- ✅ **Top 3 Highlighting** - Color-coded for 1st, 2nd, and 3rd place
-- ✅ **Responsive Design** - Works on mobile, tablet, and desktop
-- ✅ **Tailwind CSS** - Easy to customize and scale
-
-## 📝 Customization
-
-### Edit Teams & Data
-
-### 1. Update Data
-1.  Run the project locally (`npm run dev` and `node backend/server.js`).
-2.  Go to the **Admin Panel** (`/admin`).
-3.  Add matches, upload forms, or update standings.
-
-## 📝 Customization
-
-### Edit Teams & Configuration
-Modify `backend/data/db.json` directly or use the Admin UI.
-
-- Team names, emojis, and IDs
-- Match results and dates
-- Standings and points
-
-### Customize Styling
-
-All styles use Tailwind CSS classes. Modify `tailwind.config.js` for:
-
-- Color palette
-- Spacing
-- Responsive breakpoints
-
-### Add Components
-
-To add new features:
-
-1. Create a new component in `src/components/`
-2. Import and use it in `App.jsx`
-
-## 🏗️ Build for Production
-
-```bash
-npm run build
-
-# Optionally preview the production build
-npm run preview
-```
-
-Creates an optimized production build in the `dist/` directory.
-
-## 📦 Dependencies
-
-- **React 19** - UI framework
-- **Tailwind CSS 3** - Utility-first CSS
-- **Vite** - Dev server and bundler
-- **PostCSS** - CSS processing
-
----
-
-**Version**: 0.1.0 | **React + Tailwind CSS**
+**nus ihg2526 dashboard**
