@@ -33,6 +33,9 @@ export default function About({ teams }) {
                     <div className="pt-6 border-t border-theme-border">
                         <h3 className="text-xl font-bold text-theme-text-main mb-2">Contact Us</h3>
                         <p className="text-theme-text-dim">
+                            <p className="text-theme-text-muted mb-4">
+                                Follow the official Instagram <a href="https://www.instagram.com/ihgofficial" target="_blank" rel="noopener noreferrer" className="text-theme-accent-base hover:underline">@ihgofficial</a> for updates. This is an unofficial site and may contain inaccuracies—please refer to the official account for verified results.
+                            </p>
                             For inquiries or to report score discrepancies, please contact the sports committee.
                         </p>
                     </div>
